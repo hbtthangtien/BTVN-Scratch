@@ -1,530 +1,766 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nhiệm Vụ Scratch Về Nhà</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        body {
-            font-family: 'Baloo 2', cursive;
-            background-color: #f0fdf4;
-            color: #1f2937;
-        }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 2px solid #86efac;
-            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
-        }
-        canvas {
-            background-color: #1e293b;
-            border-radius: 0.75rem;
-            cursor: crosshair;
-        }
-        .tab-btn.active {
-            background-color: #22c55e;
-            color: white;
-            border-color: #16a34a;
-        }
+      body {
+        font-family: "Baloo 2", cursive;
+        background-color: #f0fdf4;
+        color: #1f2937;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 2px solid #86efac;
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
+      }
+      canvas {
+        background-color: #1e293b;
+        border-radius: 0.75rem;
+        cursor: crosshair;
+      }
+      .tab-btn.active {
+        background-color: #22c55e;
+        color: white;
+        border-color: #16a34a;
+      }
     </style>
-</head>
-<body class="min-h-screen p-4 md:p-8">
-
+  </head>
+  <body class="min-h-screen p-4 md:p-8">
     <header class="max-w-5xl mx-auto text-center mb-8">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-green-600 mb-2 drop-shadow-sm">
-            <i class="fa-solid fa-gamepad mr-3"></i>Nhiệm Vụ Của Coder Nhí
-        </h1>
-        <p class="text-lg text-gray-600 font-semibold">Hãy chọn 1 trong 3 thử thách dưới đây để luyện tập nhé!</p>
+      <h1
+        class="text-4xl md:text-5xl font-extrabold text-green-600 mb-2 drop-shadow-sm"
+      >
+        <i class="fa-solid fa-gamepad mr-3"></i>Nhiệm Vụ Của Coder Nhí
+      </h1>
+      <p class="text-lg text-gray-600 font-semibold">
+        Hãy chọn 1 trong 3 thử thách dưới đây để luyện tập nhé!
+      </p>
     </header>
 
     <main class="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6">
-        
-        <!-- Cột Menu -->
-        <div class="w-full lg:w-1/3 flex flex-col gap-3">
-            <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn active text-left px-6 py-4 rounded-xl font-bold text-lg border-2 border-green-300 bg-white hover:bg-green-50 transition-colors shadow-sm">
-                <i class="fa-solid fa-robot text-xl w-8 text-center"></i> 1. Robot Giao Hàng
-            </button>
-            <button onclick="switchTab(2)" id="btn-tab-2" class="tab-btn text-left px-6 py-4 rounded-xl font-bold text-lg border-2 border-green-300 bg-white hover:bg-green-50 transition-colors shadow-sm">
-                <i class="fa-solid fa-wand-magic-sparkles text-xl w-8 text-center"></i> 2. Phù Thủy Giải Toán
-            </button>
-            <button onclick="switchTab(3)" id="btn-tab-3" class="tab-btn text-left px-6 py-4 rounded-xl font-bold text-lg border-2 border-green-300 bg-white hover:bg-green-50 transition-colors shadow-sm">
-                <i class="fa-solid fa-meteor text-xl w-8 text-center"></i> 3. Lá Chắn Không Gian
-            </button>
+      <!-- Cột Menu -->
+      <div class="w-full lg:w-1/3 flex flex-col gap-3">
+        <button
+          onclick="switchTab(1)"
+          id="btn-tab-1"
+          class="tab-btn active text-left px-6 py-4 rounded-xl font-bold text-lg border-2 border-green-300 bg-white hover:bg-green-50 transition-colors shadow-sm"
+        >
+          <i class="fa-solid fa-robot text-xl w-8 text-center"></i> 1. Robot
+          Giao Hàng
+        </button>
+        <button
+          onclick="switchTab(2)"
+          id="btn-tab-2"
+          class="tab-btn text-left px-6 py-4 rounded-xl font-bold text-lg border-2 border-green-300 bg-white hover:bg-green-50 transition-colors shadow-sm"
+        >
+          <i
+            class="fa-solid fa-wand-magic-sparkles text-xl w-8 text-center"
+          ></i>
+          2. Phù Thủy Giải Toán
+        </button>
+        <button
+          onclick="switchTab(3)"
+          id="btn-tab-3"
+          class="tab-btn text-left px-6 py-4 rounded-xl font-bold text-lg border-2 border-green-300 bg-white hover:bg-green-50 transition-colors shadow-sm"
+        >
+          <i class="fa-solid fa-meteor text-xl w-8 text-center"></i> 3. Lá Chắn
+          Không Gian
+        </button>
+      </div>
+
+      <!-- Khu vực hiển thị Nội dung -->
+      <div
+        class="w-full lg:w-2/3 glass-panel rounded-2xl p-6 relative overflow-hidden"
+      >
+        <!-- BÀI 1: ROBOT GIAO HÀNG -->
+        <div id="content-1" class="tab-content block">
+          <h2 class="text-3xl font-bold text-blue-600 mb-4">
+            Thử thách 1: Robot Giao Hàng
+          </h2>
+
+          <div
+            class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6"
+          >
+            <h3 class="font-bold text-blue-700 text-lg mb-2">
+              <i class="fa-solid fa-bullseye"></i> Mục tiêu trò chơi:
+            </h3>
+            <p class="text-gray-700">
+              Điều khiển Robot bằng <strong>phím mũi tên</strong> để di chuyển.
+              Đầu của Robot luôn <strong>quay theo hướng chuột</strong>. Hãy
+              điều khiển Robot đi nhặt các thùng hàng. Khi nhặt được 5 thùng sẽ
+              chiến thắng!
+            </p>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="font-bold text-gray-800 text-lg mb-2">
+              <i class="fa-solid fa-display"></i> Trải nghiệm thử (Dùng mũi tên
+              và chuột):
+            </h3>
+            <!-- Canvas mô phỏng Bài 1 -->
+            <canvas
+              id="canvas1"
+              width="600"
+              height="300"
+              class="w-full h-auto max-w-full touch-none"
+            ></canvas>
+          </div>
+
+          <div
+            class="bg-yellow-50 border border-yellow-300 p-5 rounded-xl shadow-inner"
+          >
+            <h3 class="font-bold text-yellow-700 text-lg mb-3">
+              <i class="fa-solid fa-lightbulb text-yellow-500"></i> Gợi ý để lập
+              trình:
+            </h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+              <li>
+                <strong>Di chuyển:</strong> Dùng các khối điều kiện "Nếu phím
+                mũi tên ... được bấm" để thay đổi tọa độ x, y.
+              </li>
+              <li>
+                <strong>Ngắm hướng:</strong> Dùng khối lệnh "Hướng về phía đối
+                tượng" nào nhỉ?
+              </li>
+              <li>
+                <strong>Tương tác (Con hãy làm 2 cách sau):</strong>
+                <ul
+                  class="list-[circle] list-inside ml-6 mt-1 text-sm text-gray-600 space-y-1"
+                >
+                  <li>
+                    <strong>Cách 1 (Dùng tín hiệu):</strong> Khi Robot đụng trúng Thùng hàng, làm sao để Robot "báo tin" cho Thùng hàng biết để Thùng hàng tự cất mình đi và cộng điểm cho người chơi?
+                </li>
+                <li>
+                    <strong>Cách 2 (Tự kiểm tra):</strong> Nếu không dùng cách báo tin, bản thân chiếc Thùng hàng có thể tự mình "canh chừng" xem Robot có đang chạm vào mình không? (Gợi ý: Thùng hàng sẽ phải quan sát việc này liên tục từ đầu đến cuối game mà không được nghỉ ngơi).
+                </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Thắng cuộc:</strong> Dùng biến số Điểm. Khi Điểm = 5,
+                nhớ dừng lại và đổi Phông nền nhé!
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Khu vực hiển thị Nội dung -->
-        <div class="w-full lg:w-2/3 glass-panel rounded-2xl p-6 relative overflow-hidden">
-            
-            <!-- BÀI 1: ROBOT GIAO HÀNG -->
-            <div id="content-1" class="tab-content block">
-                <h2 class="text-3xl font-bold text-blue-600 mb-4">Thử thách 1: Robot Giao Hàng</h2>
-                
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
-                    <h3 class="font-bold text-blue-700 text-lg mb-2"><i class="fa-solid fa-bullseye"></i> Mục tiêu trò chơi:</h3>
-                    <p class="text-gray-700">Điều khiển Robot bằng <strong>phím mũi tên</strong> để di chuyển. Đầu của Robot luôn <strong>quay theo hướng chuột</strong>. Hãy điều khiển Robot đi nhặt các thùng hàng. Khi nhặt được 5 thùng sẽ chiến thắng!</p>
-                </div>
+        <!-- BÀI 2: PHÙ THỦY GIẢI TOÁN -->
+        <div id="content-2" class="tab-content hidden">
+          <h2 class="text-3xl font-bold text-purple-600 mb-4">
+            Thử thách 2: Phù Thủy Giải Toán
+          </h2>
 
-                <div class="mb-6">
-                    <h3 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-display"></i> Trải nghiệm thử (Dùng mũi tên và chuột):</h3>
-                    <!-- Canvas mô phỏng Bài 1 -->
-                    <canvas id="canvas1" width="600" height="300" class="w-full h-auto max-w-full touch-none"></canvas>
-                </div>
+          <div
+            class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-6"
+          >
+            <h3 class="font-bold text-purple-700 text-lg mb-2">
+              <i class="fa-solid fa-bullseye"></i> Mục tiêu trò chơi:
+            </h3>
+            <p class="text-gray-700">
+              Phù thủy đứng ở giữa màn hình và luôn quay theo chuột. Sẽ có phép
+              toán hiện ra. Người chơi cần di chuyển chuột để ngắm, và
+              <strong>click chuột</strong> (hoặc bấm phím) vào đúng viên pha lê
+              có chứa đáp án đúng!
+            </p>
+          </div>
 
-                <div class="bg-yellow-50 border border-yellow-300 p-5 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-yellow-700 text-lg mb-3"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Gợi ý để lập trình:</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><strong>Di chuyển:</strong> Dùng các khối điều kiện "Nếu phím mũi tên ... được bấm" để thay đổi tọa độ x, y.</li>
-                        <li><strong>Ngắm hướng:</strong> Dùng khối lệnh "Hướng về phía đối tượng" nào nhỉ?</li>
-                        <li><strong>Tương tác (Phát tín hiệu):</strong> Khi Robot chạm vào Thùng hàng, Robot cần <strong>Phát ra một tin nhắn</strong>. Thùng hàng khi <strong>Nhận được tin nhắn</strong> đó sẽ phải làm gì để "biến mất" và "xuất hiện chỗ khác"?</li>
-                        <li><strong>Thắng cuộc:</strong> Dùng biến số Điểm. Khi Điểm = 5, nhớ dừng lại và đổi Phông nền nhé!</li>
-                    </ul>
-                </div>
+          <div class="mb-6">
+            <h3 class="font-bold text-gray-800 text-lg mb-2">
+              <i class="fa-solid fa-display"></i> Trải nghiệm thử (Di chuyển và
+              Click chuột):
+            </h3>
+            <div
+              class="text-center font-bold text-xl text-purple-700 mb-2"
+              id="math-question"
+            >
+              5 + 3 = ?
             </div>
+            <canvas
+              id="canvas2"
+              width="600"
+              height="300"
+              class="w-full h-auto max-w-full touch-none"
+            ></canvas>
+          </div>
 
-            <!-- BÀI 2: PHÙ THỦY GIẢI TOÁN -->
-            <div id="content-2" class="tab-content hidden">
-                <h2 class="text-3xl font-bold text-purple-600 mb-4">Thử thách 2: Phù Thủy Giải Toán</h2>
-                
-                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-6">
-                    <h3 class="font-bold text-purple-700 text-lg mb-2"><i class="fa-solid fa-bullseye"></i> Mục tiêu trò chơi:</h3>
-                    <p class="text-gray-700">Phù thủy đứng ở giữa màn hình và luôn quay theo chuột. Sẽ có phép toán hiện ra. Người chơi cần di chuyển chuột để ngắm, và <strong>click chuột</strong> (hoặc bấm phím) vào đúng viên pha lê có chứa đáp án đúng!</p>
-                </div>
-
-                <div class="mb-6">
-                    <h3 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-display"></i> Trải nghiệm thử (Di chuyển và Click chuột):</h3>
-                    <div class="text-center font-bold text-xl text-purple-700 mb-2" id="math-question">5 + 3 = ?</div>
-                    <canvas id="canvas2" width="600" height="300" class="w-full h-auto max-w-full touch-none"></canvas>
-                </div>
-
-                <div class="bg-yellow-50 border border-yellow-300 p-5 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-yellow-700 text-lg mb-3"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Gợi ý để lập trình:</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><strong>Toán học:</strong> Sử dụng lại 2 biến Số Thứ Nhất và Số Thứ Hai kèm khối lấy ngẫu nhiên như bài trước đã học.</li>
-                        <li><strong>Ngắm bắn:</strong> Nhân vật Phù thủy cần một vòng lặp liên tục để luôn Hướng về phía Chuột.</li>
-                        <li><strong>Phát tín hiệu:</strong> Khi click chuột, Phù thủy <strong>Phát tin nhắn</strong> "Phóng phép". Viên pha lê khi <strong>Nhận tin nhắn</strong>, nếu đang chạm con trỏ chuột thì kiểm tra xem nó có phải đáp án đúng không.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- BÀI 3: LÁ CHẮN KHÔNG GIAN -->
-            <div id="content-3" class="tab-content hidden">
-                <h2 class="text-3xl font-bold text-red-600 mb-4">Thử thách 3: Lá Chắn Không Gian</h2>
-                
-                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mb-6">
-                    <h3 class="font-bold text-red-700 text-lg mb-2"><i class="fa-solid fa-bullseye"></i> Mục tiêu trò chơi:</h3>
-                    <p class="text-gray-700">Một trạm vũ trụ ở giữa luôn hướng về chuột. Các thiên thạch sẽ lao từ ngoài vào. Bạn phải bấm phím Trắng (Space) để kích hoạt lá chắn bảo vệ. Nếu có lá chắn khi thiên thạch chạm vào, bạn được điểm. Nếu quên bật lá chắn, bạn thua!</p>
-                </div>
-
-                <div class="mb-6">
-                    <h3 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-display"></i> Trải nghiệm thử (Hướng chuột và bấm SPACE):</h3>
-                    <div class="text-center font-bold text-red-500 mb-2" id="shield-status">Lá chắn: ĐANG TẮT</div>
-                    <canvas id="canvas3" width="600" height="300" class="w-full h-auto max-w-full touch-none"></canvas>
-                </div>
-
-                <div class="bg-yellow-50 border border-yellow-300 p-5 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-yellow-700 text-lg mb-3"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Gợi ý để lập trình:</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><strong>Thiên thạch:</strong> Làm giống bài hứng táo, nhưng thay vì rơi từ trên xuống, thiên thạch sẽ hướng về phía Trạm vũ trụ và di chuyển tới!</li>
-                        <li><strong>Tín hiệu bảo vệ:</strong> Khi bấm Space, Trạm vũ trụ <strong>phát tin nhắn</strong> "Bật khiên" và đổi trang phục có lá chắn trong 1 giây.</li>
-                        <li><strong>Phân định Thắng/Thua:</strong> Khi thiên thạch chạm trạm vũ trụ, hãy dùng khối <strong>Nếu... thì... nếu không thì</strong> để kiểm tra trang phục hiện tại của trạm. Nếu có khiên -> Cộng điểm. Nếu không -> Báo Game Over.</li>
-                    </ul>
-                </div>
-            </div>
-
+          <div
+            class="bg-yellow-50 border border-yellow-300 p-5 rounded-xl shadow-inner"
+          >
+            <h3 class="font-bold text-yellow-700 text-lg mb-3">
+              <i class="fa-solid fa-lightbulb text-yellow-500"></i> Gợi ý để lập
+              trình:
+            </h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+              <li>
+                <strong>Toán học:</strong> Sử dụng lại 2 biến Số Thứ Nhất và Số
+                Thứ Hai kèm khối lấy ngẫu nhiên như bài trước đã học.
+              </li>
+              <li>
+                <strong>Ngắm bắn:</strong> Nhân vật Phù thủy cần một vòng lặp
+                liên tục để luôn Hướng về phía Chuột.
+              </li>
+              <li>
+                <strong>Kiểm tra trúng đích (Con hãy làm 2 cách):</strong>
+                <ul
+                  class="list-[circle] list-inside ml-6 mt-1 text-sm text-gray-600 space-y-1"
+                >
+                    <li>
+                       <strong>Cách 1 (Dùng tín hiệu):</strong> Làm sao để Phù thủy báo cho các Viên pha lê biết rằng "Ta vừa tung phép (bấm chuột) đấy!" để viên pha lê tự kiểm tra xem mình có đang bị đũa phép (con trỏ chuột) chỉ trúng không?
+                    </li>
+                    <li>
+                        <strong>Cách 2 (Sự kiện hoặc Khối AND):</strong> Thay vì chờ Phù thủy báo tin, liệu bản thân mỗi Viên pha lê có thể tự "cảm nhận" được lúc nào người chơi click trực tiếp vào mình để xử lý đáp án không?
+                    </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <!-- BÀI 3: LÁ CHẮN KHÔNG GIAN -->
+        <div id="content-3" class="tab-content hidden">
+          <h2 class="text-3xl font-bold text-red-600 mb-4">
+            Thử thách 3: Lá Chắn Không Gian
+          </h2>
+
+          <div
+            class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mb-6"
+          >
+            <h3 class="font-bold text-red-700 text-lg mb-2">
+              <i class="fa-solid fa-bullseye"></i> Mục tiêu trò chơi:
+            </h3>
+            <p class="text-gray-700">
+              Một trạm vũ trụ ở giữa luôn hướng về chuột. Các thiên thạch sẽ lao
+              từ ngoài vào. Bạn phải bấm phím Trắng (Space) để kích hoạt lá chắn
+              bảo vệ. Nếu có lá chắn khi thiên thạch chạm vào, bạn được điểm.
+              Nếu quên bật lá chắn, bạn thua!
+            </p>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="font-bold text-gray-800 text-lg mb-2">
+              <i class="fa-solid fa-display"></i> Trải nghiệm thử (Hướng chuột
+              và bấm SPACE):
+            </h3>
+            <div
+              class="text-center font-bold text-red-500 mb-2"
+              id="shield-status"
+            >
+              Lá chắn: ĐANG TẮT
+            </div>
+            <canvas
+              id="canvas3"
+              width="600"
+              height="300"
+              class="w-full h-auto max-w-full touch-none"
+            ></canvas>
+          </div>
+
+          <div
+            class="bg-yellow-50 border border-yellow-300 p-5 rounded-xl shadow-inner"
+          >
+            <h3 class="font-bold text-yellow-700 text-lg mb-3">
+              <i class="fa-solid fa-lightbulb text-yellow-500"></i> Gợi ý để lập
+              trình:
+            </h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+              <li>
+                <strong>Thiên thạch:</strong> Làm giống bài hứng táo, nhưng thay
+                vì rơi từ trên xuống, thiên thạch sẽ hướng về phía Trạm vũ trụ
+                và di chuyển tới!
+              </li>
+              <li>
+                <strong>Kích hoạt lá chắn & Va chạm (Làm 2 cách):</strong>
+                <ul
+                  class="list-[circle] list-inside ml-6 mt-1 text-sm text-gray-600 space-y-1"
+                >
+                  <li>
+                    <strong>Cách 1 (Dùng tín hiệu):</strong> Khi va chạm xảy ra, làm sao để Thiên thạch "báo động" cho Trạm vũ trụ biết? Trạm vũ trụ sau khi nghe báo động sẽ tự nhìn lại xem mình đang mặc bộ đồ nào (có bật khiên hay không) để quyết định cộng điểm hay báo thua.
+                  </li>
+                  <li>
+                      <strong>Cách 2 (Dùng Biến số):</strong> Con thử tạo một "cuốn sổ ghi chép" (Biến số) tên là Lá chắn xem sao. Khi người chơi bật khiên, sổ ghi là "Đang bật". Lúc Thiên thạch đâm vào trạm, nó sẽ "đọc sổ", nếu thấy khiên "Đang bật" thì tự vỡ ra để cộng điểm, nếu không thấy thì đâm sập trạm luôn!
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
-        // --- LOGIC CHUYỂN TAB ---
-        function switchTab(tabId) {
-            // Ẩn tất cả nội dung
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            // Bỏ active tất cả nút
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            // Hiện nội dung được chọn
-            document.getElementById('content-' + tabId).classList.remove('hidden');
-            // Active nút được chọn
-            document.getElementById('btn-tab-' + tabId).classList.add('active');
+      // --- LOGIC CHUYỂN TAB ---
+      function switchTab(tabId) {
+        // Ẩn tất cả nội dung
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((el) => el.classList.add("hidden"));
+        // Bỏ active tất cả nút
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((el) => el.classList.remove("active"));
 
-            // Reset trạng thái game mô phỏng
-            if(tabId === 1) initGame1();
-            if(tabId === 2) initGame2();
-            if(tabId === 3) initGame3();
+        // Hiện nội dung được chọn
+        document.getElementById("content-" + tabId).classList.remove("hidden");
+        // Active nút được chọn
+        document.getElementById("btn-tab-" + tabId).classList.add("active");
+
+        // Reset trạng thái game mô phỏng
+        if (tabId === 1) initGame1();
+        if (tabId === 2) initGame2();
+        if (tabId === 3) initGame3();
+      }
+
+      // BIẾN TOÀN CỤC CHO GAME LOOP
+      let animationFrameId;
+      let mouseX = 300;
+      let mouseY = 150;
+      let keys = {};
+
+      // Bắt sự kiện phím và chuột chung
+      window.addEventListener("keydown", (e) => {
+        keys[e.code] = true;
+      });
+      window.addEventListener("keyup", (e) => {
+        keys[e.code] = false;
+      });
+
+      function updateMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        scaleX = canvas.width / rect.width;
+        scaleY = canvas.height / rect.height;
+        mouseX = (evt.clientX - rect.left) * scaleX;
+        mouseY = (evt.clientY - rect.top) * scaleY;
+      }
+
+      function cancelLoops() {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      }
+
+      // --- GAME 1: ROBOT GIAO HÀNG ---
+      function initGame1() {
+        cancelLoops();
+        const canvas = document.getElementById("canvas1");
+        const ctx = canvas.getContext("2d");
+
+        // Bắt sự kiện chuột cho riêng canvas này
+        canvas.onmousemove = (e) => updateMousePos(canvas, e);
+        canvas.ontouchmove = (e) => updateMousePos(canvas, e.touches[0]);
+
+        let robot = { x: 300, y: 150, size: 30, speed: 3 };
+        let box = { x: 100, y: 100, size: 25, active: true };
+        let score = 0;
+
+        function drawGame1() {
+          // Di chuyển
+          if (keys["ArrowUp"] || keys["KeyW"]) robot.y -= robot.speed;
+          if (keys["ArrowDown"] || keys["KeyS"]) robot.y += robot.speed;
+          if (keys["ArrowLeft"] || keys["KeyA"]) robot.x -= robot.speed;
+          if (keys["ArrowRight"] || keys["KeyD"]) robot.x += robot.speed;
+
+          // Giới hạn màn hình
+          robot.x = Math.max(
+            robot.size,
+            Math.min(canvas.width - robot.size, robot.x),
+          );
+          robot.y = Math.max(
+            robot.size,
+            Math.min(canvas.height - robot.size, robot.y),
+          );
+
+          // Tính góc quay
+          let dx = mouseX - robot.x;
+          let dy = mouseY - robot.y;
+          let angle = Math.atan2(dy, dx);
+
+          // Va chạm
+          if (
+            box.active &&
+            Math.hypot(robot.x - box.x, robot.y - box.y) < robot.size + box.size
+          ) {
+            score++;
+            box.active = false;
+            setTimeout(() => {
+              box.x = Math.random() * (canvas.width - 50) + 25;
+              box.y = Math.random() * (canvas.height - 50) + 25;
+              box.active = true;
+            }, 500);
+          }
+
+          // Vẽ
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Vẽ lưới nền
+          ctx.strokeStyle = "#334155";
+          ctx.lineWidth = 1;
+          for (let i = 0; i < canvas.width; i += 40) {
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i, canvas.height);
+            ctx.stroke();
+          }
+          for (let i = 0; i < canvas.height; i += 40) {
+            ctx.beginPath();
+            ctx.moveTo(0, i);
+            ctx.lineTo(canvas.width, i);
+            ctx.stroke();
+          }
+
+          // Vẽ thùng
+          if (box.active) {
+            ctx.fillStyle = "#facc15";
+            ctx.fillRect(
+              box.x - box.size / 2,
+              box.y - box.size / 2,
+              box.size,
+              box.size,
+            );
+            ctx.strokeStyle = "#ca8a04";
+            ctx.strokeRect(
+              box.x - box.size / 2,
+              box.y - box.size / 2,
+              box.size,
+              box.size,
+            );
+            ctx.fillStyle = "#ca8a04";
+            ctx.font = "14px Arial";
+            ctx.fillText("📦", box.x - 10, box.y + 5);
+          }
+
+          // Vẽ điểm
+          ctx.fillStyle = "white";
+          ctx.font = "bold 20px Arial";
+          ctx.fillText("Điểm: " + score, 10, 30);
+
+          // Vẽ Robot
+          ctx.save();
+          ctx.translate(robot.x, robot.y);
+          ctx.rotate(angle);
+
+          // Thân robot
+          ctx.fillStyle = "#3b82f6";
+          ctx.fillRect(
+            -robot.size / 2,
+            -robot.size / 2,
+            robot.size,
+            robot.size,
+          );
+          // Đầu robot (chỉ hướng)
+          ctx.fillStyle = "#ef4444";
+          ctx.beginPath();
+          ctx.moveTo(robot.size / 2, 0);
+          ctx.lineTo(robot.size / 2 - 10, -10);
+          ctx.lineTo(robot.size / 2 - 10, 10);
+          ctx.fill();
+
+          ctx.restore();
+
+          animationFrameId = requestAnimationFrame(drawGame1);
+        }
+        drawGame1();
+      }
+
+      // --- GAME 2: PHÙ THỦY GIẢI TOÁN ---
+      function initGame2() {
+        cancelLoops();
+        const canvas = document.getElementById("canvas2");
+        const ctx = canvas.getContext("2d");
+        const questionEl = document.getElementById("math-question");
+
+        canvas.onmousemove = (e) => updateMousePos(canvas, e);
+        canvas.ontouchmove = (e) => updateMousePos(canvas, e.touches[0]);
+
+        let wiz = { x: 300, y: 150, size: 25 };
+        let targets = [];
+        let score = 0;
+        let currentAnswer = 0;
+        let isShooting = false;
+        let beamEndpoint = { x: 300, y: 150 };
+
+        function generateQuestion() {
+          let a = Math.floor(Math.random() * 10) + 1;
+          let b = Math.floor(Math.random() * 10) + 1;
+          currentAnswer = a + b;
+          questionEl.innerText = `${a} + ${b} = ?`;
+
+          let wrongAnswer =
+            currentAnswer +
+            (Math.random() > 0.5 ? 1 : -1) *
+              (Math.floor(Math.random() * 3) + 1);
+
+          targets = [
+            {
+              x: 100,
+              y: Math.random() * 200 + 50,
+              val: currentAnswer,
+              active: true,
+            },
+            {
+              x: 500,
+              y: Math.random() * 200 + 50,
+              val: wrongAnswer,
+              active: true,
+            },
+          ];
+          // Đảo vị trí ngẫu nhiên
+          if (Math.random() > 0.5) {
+            let temp = targets[0].val;
+            targets[0].val = targets[1].val;
+            targets[1].val = temp;
+          }
         }
 
-        // BIẾN TOÀN CỤC CHO GAME LOOP
-        let animationFrameId;
-        let mouseX = 300;
-        let mouseY = 150;
-        let keys = {};
+        generateQuestion();
 
-        // Bắt sự kiện phím và chuột chung
-        window.addEventListener('keydown', (e) => { keys[e.code] = true; });
-        window.addEventListener('keyup', (e) => { keys[e.code] = false; });
-        
-        function updateMousePos(canvas, evt) {
-            var rect = canvas.getBoundingClientRect();
-            scaleX = canvas.width / rect.width;
-            scaleY = canvas.height / rect.height;
-            mouseX = (evt.clientX - rect.left) * scaleX;
-            mouseY = (evt.clientY - rect.top) * scaleY;
-        }
+        canvas.onmousedown = () => {
+          isShooting = true;
+          beamEndpoint = { x: mouseX, y: mouseY };
 
-        function cancelLoops() {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        }
-
-        // --- GAME 1: ROBOT GIAO HÀNG ---
-        function initGame1() {
-            cancelLoops();
-            const canvas = document.getElementById('canvas1');
-            const ctx = canvas.getContext('2d');
-            
-            // Bắt sự kiện chuột cho riêng canvas này
-            canvas.onmousemove = (e) => updateMousePos(canvas, e);
-            canvas.ontouchmove = (e) => updateMousePos(canvas, e.touches[0]);
-
-            let robot = { x: 300, y: 150, size: 30, speed: 3 };
-            let box = { x: 100, y: 100, size: 25, active: true };
-            let score = 0;
-
-            function drawGame1() {
-                // Di chuyển
-                if(keys['ArrowUp'] || keys['KeyW']) robot.y -= robot.speed;
-                if(keys['ArrowDown'] || keys['KeyS']) robot.y += robot.speed;
-                if(keys['ArrowLeft'] || keys['KeyA']) robot.x -= robot.speed;
-                if(keys['ArrowRight'] || keys['KeyD']) robot.x += robot.speed;
-
-                // Giới hạn màn hình
-                robot.x = Math.max(robot.size, Math.min(canvas.width - robot.size, robot.x));
-                robot.y = Math.max(robot.size, Math.min(canvas.height - robot.size, robot.y));
-
-                // Tính góc quay
-                let dx = mouseX - robot.x;
-                let dy = mouseY - robot.y;
-                let angle = Math.atan2(dy, dx);
-
-                // Va chạm
-                if (box.active && Math.hypot(robot.x - box.x, robot.y - box.y) < robot.size + box.size) {
-                    score++;
-                    box.active = false;
-                    setTimeout(() => {
-                        box.x = Math.random() * (canvas.width - 50) + 25;
-                        box.y = Math.random() * (canvas.height - 50) + 25;
-                        box.active = true;
-                    }, 500);
-                }
-
-                // Vẽ
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                // Vẽ lưới nền
-                ctx.strokeStyle = '#334155';
-                ctx.lineWidth = 1;
-                for(let i=0; i<canvas.width; i+=40) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke(); }
-                for(let i=0; i<canvas.height; i+=40) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke(); }
-
-                // Vẽ thùng
-                if (box.active) {
-                    ctx.fillStyle = '#facc15';
-                    ctx.fillRect(box.x - box.size/2, box.y - box.size/2, box.size, box.size);
-                    ctx.strokeStyle = '#ca8a04';
-                    ctx.strokeRect(box.x - box.size/2, box.y - box.size/2, box.size, box.size);
-                    ctx.fillStyle = '#ca8a04';
-                    ctx.font = '14px Arial';
-                    ctx.fillText("📦", box.x - 10, box.y + 5);
-                }
-
-                // Vẽ điểm
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 20px Arial';
-                ctx.fillText('Điểm: ' + score, 10, 30);
-
-                // Vẽ Robot
-                ctx.save();
-                ctx.translate(robot.x, robot.y);
-                ctx.rotate(angle);
-                
-                // Thân robot
-                ctx.fillStyle = '#3b82f6';
-                ctx.fillRect(-robot.size/2, -robot.size/2, robot.size, robot.size);
-                // Đầu robot (chỉ hướng)
-                ctx.fillStyle = '#ef4444';
-                ctx.beginPath();
-                ctx.moveTo(robot.size/2, 0);
-                ctx.lineTo(robot.size/2 - 10, -10);
-                ctx.lineTo(robot.size/2 - 10, 10);
-                ctx.fill();
-
-                ctx.restore();
-
-                animationFrameId = requestAnimationFrame(drawGame1);
+          targets.forEach((t) => {
+            if (t.active && Math.hypot(mouseX - t.x, mouseY - t.y) < 30) {
+              if (t.val === currentAnswer) {
+                score++;
+                t.active = false;
+                setTimeout(generateQuestion, 1000);
+              }
             }
-            drawGame1();
+          });
+
+          setTimeout(() => (isShooting = false), 200);
+        };
+
+        function drawGame2() {
+          let dx = mouseX - wiz.x;
+          let dy = mouseY - wiz.y;
+          let angle = Math.atan2(dy, dx);
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Vẽ điểm
+          ctx.fillStyle = "white";
+          ctx.font = "bold 20px Arial";
+          ctx.fillText("Điểm: " + score, 10, 30);
+
+          // Vẽ mục tiêu
+          targets.forEach((t) => {
+            if (!t.active) return;
+            ctx.beginPath();
+            ctx.arc(t.x, t.y, 25, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(168, 85, 247, 0.5)";
+            ctx.fill();
+            ctx.strokeStyle = "#d8b4fe";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            ctx.fillStyle = "white";
+            ctx.font = "bold 20px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(t.val, t.x, t.y);
+          });
+
+          // Vẽ tia phép thuật
+          if (isShooting) {
+            ctx.beginPath();
+            ctx.moveTo(wiz.x, wiz.y);
+            ctx.lineTo(beamEndpoint.x, beamEndpoint.y);
+            ctx.strokeStyle = "#facc15";
+            ctx.lineWidth = 5;
+            ctx.stroke();
+          }
+
+          // Vẽ phù thủy
+          ctx.save();
+          ctx.translate(wiz.x, wiz.y);
+          ctx.rotate(angle);
+
+          ctx.beginPath();
+          ctx.moveTo(20, 0);
+          ctx.lineTo(-15, 15);
+          ctx.lineTo(-15, -15);
+          ctx.fillStyle = "#a855f7";
+          ctx.fill();
+
+          ctx.restore();
+
+          animationFrameId = requestAnimationFrame(drawGame2);
+        }
+        drawGame2();
+      }
+
+      // --- GAME 3: LÁ CHẮN KHÔNG GIAN ---
+      function initGame3() {
+        cancelLoops();
+        const canvas = document.getElementById("canvas3");
+        const ctx = canvas.getContext("2d");
+        const statusEl = document.getElementById("shield-status");
+
+        canvas.onmousemove = (e) => updateMousePos(canvas, e);
+        canvas.ontouchmove = (e) => updateMousePos(canvas, e.touches[0]);
+
+        let base = { x: 300, y: 150, radius: 25 };
+        let meteors = [];
+        let score = 0;
+        let shieldActive = false;
+        let shieldTimer = 0;
+
+        function spawnMeteor() {
+          // Xuất hiện ở viền màn hình ngẫu nhiên
+          let x, y;
+          if (Math.random() > 0.5) {
+            x = Math.random() > 0.5 ? 0 : canvas.width;
+            y = Math.random() * canvas.height;
+          } else {
+            x = Math.random() * canvas.width;
+            y = Math.random() > 0.5 ? 0 : canvas.height;
+          }
+          meteors.push({
+            x: x,
+            y: y,
+            speed: Math.random() * 1.5 + 1,
+            size: 15,
+            active: true,
+          });
         }
 
-        // --- GAME 2: PHÙ THỦY GIẢI TOÁN ---
-        function initGame2() {
-            cancelLoops();
-            const canvas = document.getElementById('canvas2');
-            const ctx = canvas.getContext('2d');
-            const questionEl = document.getElementById('math-question');
-            
-            canvas.onmousemove = (e) => updateMousePos(canvas, e);
-            canvas.ontouchmove = (e) => updateMousePos(canvas, e.touches[0]);
+        let spawnInterval = setInterval(spawnMeteor, 2000);
 
-            let wiz = { x: 300, y: 150, size: 25 };
-            let targets = [];
-            let score = 0;
-            let currentAnswer = 0;
-            let isShooting = false;
-            let beamEndpoint = {x: 300, y: 150};
+        // Bắt phím Space
+        window.addEventListener("keydown", (e) => {
+          if (
+            e.code === "Space" &&
+            shieldTimer <= 0 &&
+            document
+              .getElementById("content-3")
+              .classList.contains("hidden") === false
+          ) {
+            shieldActive = true;
+            shieldTimer = 30; // Active for 30 frames
+            statusEl.innerText = "Lá chắn: ĐANG BẬT!";
+            statusEl.classList.remove("text-red-500");
+            statusEl.classList.add("text-green-500");
+          }
+        });
 
-            function generateQuestion() {
-                let a = Math.floor(Math.random() * 10) + 1;
-                let b = Math.floor(Math.random() * 10) + 1;
-                currentAnswer = a + b;
-                questionEl.innerText = `${a} + ${b} = ?`;
-                
-                let wrongAnswer = currentAnswer + (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 3) + 1);
-                
-                targets = [
-                    { x: 100, y: Math.random()*200 + 50, val: currentAnswer, active: true },
-                    { x: 500, y: Math.random()*200 + 50, val: wrongAnswer, active: true }
-                ];
-                // Đảo vị trí ngẫu nhiên
-                if(Math.random() > 0.5) {
-                    let temp = targets[0].val;
-                    targets[0].val = targets[1].val;
-                    targets[1].val = temp;
-                }
+        function drawGame3() {
+          let dx = mouseX - base.x;
+          let dy = mouseY - base.y;
+          let angle = Math.atan2(dy, dx);
+
+          if (shieldTimer > 0) {
+            shieldTimer--;
+          } else {
+            shieldActive = false;
+            statusEl.innerText = "Lá chắn: ĐANG TẮT (Bấm SPACE)";
+            statusEl.classList.remove("text-green-500");
+            statusEl.classList.add("text-red-500");
+          }
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Vẽ sao nền
+          ctx.fillStyle = "white";
+          for (let i = 0; i < 20; i++) {
+            ctx.fillRect(
+              Math.random() * canvas.width,
+              Math.random() * canvas.height,
+              1,
+              1,
+            );
+          }
+
+          // Điểm
+          ctx.fillStyle = "white";
+          ctx.font = "bold 20px Arial";
+          ctx.textAlign = "left";
+          ctx.fillText("Điểm: " + score, 10, 30);
+
+          // Di chuyển và vẽ thiên thạch
+          for (let i = meteors.length - 1; i >= 0; i--) {
+            let m = meteors[i];
+            if (!m.active) continue;
+
+            // Tính hướng bay về phía trạm
+            let mdx = base.x - m.x;
+            let mdy = base.y - m.y;
+            let dist = Math.hypot(mdx, mdy);
+
+            m.x += (mdx / dist) * m.speed;
+            m.y += (mdy / dist) * m.speed;
+
+            // Vẽ thiên thạch
+            ctx.beginPath();
+            ctx.arc(m.x, m.y, m.size, 0, Math.PI * 2);
+            ctx.fillStyle = "#ef4444";
+            ctx.fill();
+
+            // Va chạm
+            if (dist < base.radius + m.size + (shieldActive ? 10 : 0)) {
+              m.active = false;
+              if (shieldActive) {
+                score++; // Đỡ được
+              } else {
+                score = 0; // Chết, reset điểm
+              }
             }
-            
-            generateQuestion();
+          }
 
-            canvas.onmousedown = () => {
-                isShooting = true;
-                beamEndpoint = {x: mouseX, y: mouseY};
-                
-                targets.forEach(t => {
-                    if(t.active && Math.hypot(mouseX - t.x, mouseY - t.y) < 30) {
-                        if(t.val === currentAnswer) {
-                            score++;
-                            t.active = false;
-                            setTimeout(generateQuestion, 1000);
-                        }
-                    }
-                });
-                
-                setTimeout(() => isShooting = false, 200);
-            };
+          // Vẽ lá chắn
+          if (shieldActive) {
+            ctx.beginPath();
+            ctx.arc(base.x, base.y, base.radius + 10, 0, Math.PI * 2);
+            ctx.strokeStyle = "#22c55e";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.fillStyle = "rgba(34, 197, 94, 0.2)";
+            ctx.fill();
+          }
 
-            function drawGame2() {
-                let dx = mouseX - wiz.x;
-                let dy = mouseY - wiz.y;
-                let angle = Math.atan2(dy, dx);
+          // Vẽ trạm
+          ctx.save();
+          ctx.translate(base.x, base.y);
+          ctx.rotate(angle);
 
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.beginPath();
+          ctx.arc(0, 0, base.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "#64748b";
+          ctx.fill();
+          ctx.fillStyle = "#38bdf8";
+          ctx.fillRect(base.radius - 5, -10, 15, 20); // Pháo
 
-                // Vẽ điểm
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 20px Arial';
-                ctx.fillText('Điểm: ' + score, 10, 30);
+          ctx.restore();
 
-                // Vẽ mục tiêu
-                targets.forEach(t => {
-                    if(!t.active) return;
-                    ctx.beginPath();
-                    ctx.arc(t.x, t.y, 25, 0, Math.PI*2);
-                    ctx.fillStyle = 'rgba(168, 85, 247, 0.5)';
-                    ctx.fill();
-                    ctx.strokeStyle = '#d8b4fe';
-                    ctx.lineWidth = 3;
-                    ctx.stroke();
-                    
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 20px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(t.val, t.x, t.y);
-                });
-
-                // Vẽ tia phép thuật
-                if(isShooting) {
-                    ctx.beginPath();
-                    ctx.moveTo(wiz.x, wiz.y);
-                    ctx.lineTo(beamEndpoint.x, beamEndpoint.y);
-                    ctx.strokeStyle = '#facc15';
-                    ctx.lineWidth = 5;
-                    ctx.stroke();
-                }
-
-                // Vẽ phù thủy
-                ctx.save();
-                ctx.translate(wiz.x, wiz.y);
-                ctx.rotate(angle);
-                
-                ctx.beginPath();
-                ctx.moveTo(20, 0);
-                ctx.lineTo(-15, 15);
-                ctx.lineTo(-15, -15);
-                ctx.fillStyle = '#a855f7';
-                ctx.fill();
-                
-                ctx.restore();
-
-                animationFrameId = requestAnimationFrame(drawGame2);
-            }
-            drawGame2();
+          animationFrameId = requestAnimationFrame(drawGame3);
         }
 
-        // --- GAME 3: LÁ CHẮN KHÔNG GIAN ---
-        function initGame3() {
-            cancelLoops();
-            const canvas = document.getElementById('canvas3');
-            const ctx = canvas.getContext('2d');
-            const statusEl = document.getElementById('shield-status');
-            
-            canvas.onmousemove = (e) => updateMousePos(canvas, e);
-            canvas.ontouchmove = (e) => updateMousePos(canvas, e.touches[0]);
-
-            let base = { x: 300, y: 150, radius: 25 };
-            let meteors = [];
-            let score = 0;
-            let shieldActive = false;
-            let shieldTimer = 0;
-
-            function spawnMeteor() {
-                // Xuất hiện ở viền màn hình ngẫu nhiên
-                let x, y;
-                if(Math.random() > 0.5) {
-                    x = Math.random() > 0.5 ? 0 : canvas.width;
-                    y = Math.random() * canvas.height;
-                } else {
-                    x = Math.random() * canvas.width;
-                    y = Math.random() > 0.5 ? 0 : canvas.height;
-                }
-                meteors.push({x: x, y: y, speed: Math.random() * 1.5 + 1, size: 15, active: true});
+        // Xóa interval cũ nếu đổi tab
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.target.classList.contains("hidden")) {
+              clearInterval(spawnInterval);
             }
+          });
+        });
+        observer.observe(document.getElementById("content-3"), {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
 
-            let spawnInterval = setInterval(spawnMeteor, 2000);
+        drawGame3();
+      }
 
-            // Bắt phím Space
-            window.addEventListener('keydown', (e) => {
-                if(e.code === 'Space' && shieldTimer <= 0 && document.getElementById('content-3').classList.contains('hidden') === false) {
-                    shieldActive = true;
-                    shieldTimer = 30; // Active for 30 frames
-                    statusEl.innerText = "Lá chắn: ĐANG BẬT!";
-                    statusEl.classList.remove('text-red-500');
-                    statusEl.classList.add('text-green-500');
-                }
-            });
-
-            function drawGame3() {
-                let dx = mouseX - base.x;
-                let dy = mouseY - base.y;
-                let angle = Math.atan2(dy, dx);
-
-                if(shieldTimer > 0) {
-                    shieldTimer--;
-                } else {
-                    shieldActive = false;
-                    statusEl.innerText = "Lá chắn: ĐANG TẮT (Bấm SPACE)";
-                    statusEl.classList.remove('text-green-500');
-                    statusEl.classList.add('text-red-500');
-                }
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                // Vẽ sao nền
-                ctx.fillStyle = 'white';
-                for(let i=0; i<20; i++){
-                    ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1, 1);
-                }
-
-                // Điểm
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 20px Arial';
-                ctx.textAlign = 'left';
-                ctx.fillText('Điểm: ' + score, 10, 30);
-
-                // Di chuyển và vẽ thiên thạch
-                for(let i = meteors.length - 1; i >= 0; i--) {
-                    let m = meteors[i];
-                    if(!m.active) continue;
-
-                    // Tính hướng bay về phía trạm
-                    let mdx = base.x - m.x;
-                    let mdy = base.y - m.y;
-                    let dist = Math.hypot(mdx, mdy);
-                    
-                    m.x += (mdx/dist) * m.speed;
-                    m.y += (mdy/dist) * m.speed;
-
-                    // Vẽ thiên thạch
-                    ctx.beginPath();
-                    ctx.arc(m.x, m.y, m.size, 0, Math.PI*2);
-                    ctx.fillStyle = '#ef4444';
-                    ctx.fill();
-
-                    // Va chạm
-                    if(dist < base.radius + m.size + (shieldActive ? 10 : 0)) {
-                        m.active = false;
-                        if(shieldActive) {
-                            score++; // Đỡ được
-                        } else {
-                            score = 0; // Chết, reset điểm
-                        }
-                    }
-                }
-
-                // Vẽ lá chắn
-                if(shieldActive) {
-                    ctx.beginPath();
-                    ctx.arc(base.x, base.y, base.radius + 10, 0, Math.PI*2);
-                    ctx.strokeStyle = '#22c55e';
-                    ctx.lineWidth = 3;
-                    ctx.stroke();
-                    ctx.fillStyle = 'rgba(34, 197, 94, 0.2)';
-                    ctx.fill();
-                }
-
-                // Vẽ trạm
-                ctx.save();
-                ctx.translate(base.x, base.y);
-                ctx.rotate(angle);
-                
-                ctx.beginPath();
-                ctx.arc(0, 0, base.radius, 0, Math.PI*2);
-                ctx.fillStyle = '#64748b';
-                ctx.fill();
-                ctx.fillStyle = '#38bdf8';
-                ctx.fillRect(base.radius - 5, -10, 15, 20); // Pháo
-                
-                ctx.restore();
-
-                animationFrameId = requestAnimationFrame(drawGame3);
-            }
-            
-            // Xóa interval cũ nếu đổi tab
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.target.classList.contains('hidden')) {
-                        clearInterval(spawnInterval);
-                    }
-                });
-            });
-            observer.observe(document.getElementById('content-3'), { attributes: true, attributeFilter: ['class'] });
-
-            drawGame3();
-        }
-
-        // Khởi động bài 1 mặc định
-        initGame1();
+      // Khởi động bài 1 mặc định
+      initGame1();
     </script>
-</body>
+  </body>
 </html>
