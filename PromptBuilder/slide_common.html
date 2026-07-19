@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder: Web Trình Bày Tương Tác</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Tùy chỉnh mũi tên của datalist cho đẹp hơn trên một số trình duyệt */
+        input::-webkit-calendar-picker-indicator { opacity: 0.6; cursor: pointer; }
+    </style>
+</head>
+<body class="bg-slate-100 p-4 md:p-6 font-sans text-slate-800">
+
+    <div class="max-w-[1400px] mx-auto flex flex-col xl:flex-row gap-6">
+        
+        <!-- CỘT TRÁI: FORM CẤU HÌNH -->
+        <div class="w-full xl:w-5/12 bg-white p-6 rounded-2xl shadow border border-slate-200 h-[calc(100vh-3rem)] overflow-y-auto">
+            <h1 class="text-2xl font-extrabold text-teal-700 mb-2 flex items-center gap-2">
+                🚀 Interactive Web Prompt
+            </h1>
+            <p class="text-sm text-slate-500 mb-6">Điền thông tin hoặc chọn từ danh sách gợi ý. Bỏ trống AI sẽ tự nghĩ.</p>
+            
+            <form id="promptForm" class="space-y-5">
+                
+                <!-- Input cơ bản -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">1. Chủ đề nội dung</label>
+                    <input type="text" id="ChuDe" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none transition" placeholder="VD: Báo cáo doanh thu 2024, Cấu tạo của Trái Đất...">
+                </div>
+
+                <!-- Datalist: Mục đích -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">2. Mục đích</label>
+                    <input list="listMucDich" id="MucDich" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none transition" placeholder="Chọn hoặc tự gõ mục đích...">
+                    <datalist id="listMucDich">
+                        <option value="Thuyết trình một ý tưởng">
+                        <option value="Giải thích một quy trình">
+                        <option value="Giới thiệu dự án / Sản phẩm">
+                        <option value="Trình bày báo cáo">
+                        <option value="Mô phỏng một hiện tượng">
+                        <option value="Đào tạo nhân viên / Dạy học sinh">
+                        <option value="Tổ chức hoạt động tương tác">
+                        <option value="Cho người xem tự khám phá dữ liệu">
+                    </datalist>
+                </div>
+
+                <!-- Datalist: Đối tượng -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">3. Đối tượng người xem</label>
+                    <input list="listDoiTuong" id="DoiTuong" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none transition" placeholder="Chọn hoặc tự gõ đối tượng...">
+                    <datalist id="listDoiTuong">
+                        <option value="Người dùng phổ thông">
+                        <option value="Người không có kiến thức chuyên môn">
+                        <option value="Người có kiến thức chuyên ngành">
+                        <option value="Học sinh / Sinh viên">
+                        <option value="Giáo viên / Nhân viên">
+                        <option value="Khách hàng / Nhà đầu tư / Ban lãnh đạo">
+                    </datalist>
+                </div>
+
+                <!-- Textarea: Ý tưởng & Nội dung -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">4. Nội dung / Ý tưởng chính</label>
+                    <textarea id="NoiDungChinh" rows="2" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Vài câu mô tả ngắn. Bỏ trống AI sẽ tự xác định..."></textarea>
+                </div>
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">5. Nội dung bắt buộc</label>
+                    <textarea id="NoiDungBatBuoc" rows="2" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Dữ liệu, số liệu, tình huống bắt buộc..."></textarea>
+                </div>
+
+                <!-- Quick Insert Chips: Tương tác -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">6. Tương tác mong muốn (Có thể chọn nhiều)</label>
+                    <textarea id="TuongTac" rows="2" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none mb-2" placeholder="Gõ tương tác hoặc click vào các gợi ý bên dưới..."></textarea>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="addChip('Kéo thanh trượt thay đổi giá trị')" class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded border border-teal-200 hover:bg-teal-200">+ Kéo thanh trượt</button>
+                        <button type="button" onclick="addChip('Nhấn vào bộ phận xem giải thích')" class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded border border-teal-200 hover:bg-teal-200">+ Nhấn xem chi tiết</button>
+                        <button type="button" onclick="addChip('Kéo thả các bước theo thứ tự')" class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded border border-teal-200 hover:bg-teal-200">+ Kéo thả thứ tự</button>
+                        <button type="button" onclick="addChip('Chạy mô phỏng từng bước')" class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded border border-teal-200 hover:bg-teal-200">+ Mô phỏng</button>
+                        <button type="button" onclick="addChip('So sánh trước và sau')" class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded border border-teal-200 hover:bg-teal-200">+ So sánh</button>
+                        <button type="button" onclick="addChip('Lọc dữ liệu theo tiêu chí')" class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded border border-teal-200 hover:bg-teal-200">+ Lọc biểu đồ</button>
+                        <button type="button" onclick="addChip('Trả lời câu hỏi trắc nghiệm')" class="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded border border-teal-200 hover:bg-teal-200">+ Trắc nghiệm</button>
+                    </div>
+                </div>
+
+                <!-- Datalist: Phong cách -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">7. Phong cách giao diện</label>
+                    <input list="listPhongCach" id="PhongCach" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 outline-none transition" placeholder="Chọn phong cách...">
+                    <datalist id="listPhongCach">
+                        <option value="Hiện đại, Tối giản">
+                        <option value="Công nghệ, Dark mode">
+                        <option value="Vui tươi, Light mode">
+                        <option value="Chuyên nghiệp, Báo cáo (Dashboard)">
+                        <option value="Dạng infographic / Mô phỏng">
+                        <option value="Dạng kể chuyện (Story-telling)">
+                    </datalist>
+                </div>
+
+                <!-- Textarea: HTML Mẫu -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">8. Mã nguồn mẫu (Nếu có)</label>
+                    <textarea id="MauHTML" rows="2" class="w-full p-2.5 bg-slate-800 text-green-400 font-mono border border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Dán HTML/CSS/JS mẫu vào đây..."></textarea>
+                </div>
+            </form>
+        </div>
+
+        <!-- CỘT PHẢI: RESULT PROMPT -->
+        <div class="w-full xl:w-7/12 bg-slate-900 rounded-2xl shadow-xl border border-slate-700 flex flex-col h-[calc(100vh-3rem)] overflow-hidden">
+            <div class="p-4 border-b border-slate-700 flex justify-between items-center bg-slate-800">
+                <h2 class="text-lg font-bold text-slate-100">💻 Prompt Hoàn Chỉnh</h2>
+                <button onclick="copyPrompt()" class="bg-teal-500 hover:bg-teal-400 text-slate-900 px-5 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                    Copy Prompt
+                </button>
+            </div>
+            
+            <div class="p-4 flex-grow relative">
+                <textarea id="outputPrompt" class="w-full h-full p-2 bg-transparent text-slate-300 font-mono text-[13px] leading-relaxed focus:outline-none resize-none" readonly></textarea>
+                
+                <div id="toast" class="absolute top-6 left-1/2 transform -translate-x-1/2 bg-teal-500 text-slate-900 px-6 py-2 rounded-full shadow-lg text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
+                    Đã copy thành công!
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('input, textarea:not(#outputPrompt)');
+        const output = document.getElementById('outputPrompt');
+        
+        const getVal = (id) => document.getElementById(id).value.trim();
+        const fallback = (val, defaultTxt) => val !== "" ? val : `[${defaultTxt}]`;
+
+        // Hàm thêm nội dung từ nút Chip vào Textarea Tương tác
+        function addChip(text) {
+            const textarea = document.getElementById('TuongTac');
+            let currentVal = textarea.value.trim();
+            if(currentVal === "") {
+                textarea.value = text;
+            } else {
+                textarea.value = currentVal + ",\n" + text;
+            }
+            updatePrompt(); // Cập nhật lại output
+        }
+
+        function updatePrompt() {
+            const promptText = `# PROMPT TẠO TRANG WEB TRÌNH BÀY NỘI DUNG TƯƠNG TÁC
+
+Hãy đóng vai đồng thời là:
+1. Một lập trình viên Front-end chuyên nghiệp.
+2. Một chuyên gia thiết kế trải nghiệm tương tác.
+3. Một chuyên gia trực quan hóa thông tin.
+4. Một chuyên gia chuyển đổi nội dung, ý tưởng hoặc dữ liệu thành trải nghiệm web dễ hiểu, sinh động và có thể thao tác trực tiếp.
+
+## 1. Nhiệm vụ chính
+Tạo một trang web trình bày nội dung theo hướng **tương tác và trực quan**, không phải một bộ slide truyền thống chỉ gồm tiêu đề, văn bản và nút chuyển trang.
+Người xem không chỉ đọc mà phải có thể tương tác (nhấn, thay đổi dữ liệu, quan sát kết quả, kéo thả, mô phỏng...). Mỗi tương tác phải giúp hiểu nội dung tốt hơn, không trang trí dư thừa.
+
+---
+
+## 2. Thông tin đầu vào
+
+### Chủ đề
+${fallback(getVal('ChuDe'), 'Hãy tự xác định chủ đề')}
+
+### Mục đích
+${fallback(getVal('MucDich'), 'Thiết kế để thuyết trình hoặc trực quan hóa dữ liệu')}
+
+### Đối tượng người xem
+${fallback(getVal('DoiTuong'), 'Thiết kế cho người dùng phổ thông, dễ hiểu nhất')}
+
+### Nội dung hoặc ý tưởng chính
+${fallback(getVal('NoiDungChinh'), 'Tự xác định nội dung trọng tâm, chia phần hợp lý, tạo ví dụ và thiết kế tương tác phù hợp')}
+
+### Nội dung bắt buộc
+${fallback(getVal('NoiDungBatBuoc'), 'Tự xây dựng nội dung phù hợp với chủ đề')}
+
+### Tương tác mong muốn
+${fallback(getVal('TuongTac'), 'Tự thiết kế ít nhất 2–4 hình thức tương tác phù hợp với nội dung (ví dụ: thanh trượt, biểu đồ động, mô phỏng, chọn đáp án...)')}
+
+### Phong cách giao diện
+${fallback(getVal('PhongCach'), 'Tự chọn phong cách UI phù hợp nhất')}
+
+### Mã nguồn hoặc giao diện mẫu
+${fallback(getVal('MauHTML'), 'Không có mẫu. Hãy tự thiết kế toàn bộ từ đầu.')}
+${getVal('MauHTML') !== '' ? `
+Nếu có mẫu:
+* Giữ lại những phần tốt, sửa lỗi nếu có.
+* Thay đổi nội dung theo yêu cầu mới. Bổ sung tương tác còn thiếu.
+* Không làm mất chức năng đang hoạt động.
+` : ''}
+---
+
+## 3. Nguyên tắc quan trọng nhất
+Trang web không được chỉ là Slide tĩnh, đoạn văn dài, hay thiết kế giống PowerPoint.
+Bên trong mỗi phần chính phải có ít nhất một yếu tố: Nội dung mở dần, Thành phần đổi theo hành động, Mô phỏng, Điều khiển dữ liệu, Kéo thả, So sánh động...
+Toàn bộ trang web phải tạo cảm giác **tham gia và khám phá**.
+
+---
+
+## 4. Quy trình thiết kế nội dung
+1. Xác định thông điệp chính & quy trình cần minh họa.
+2. Xác định nội dung cần tương tác (Không biến tất cả thành văn bản).
+3. Chọn hình thức trực quan (Sơ đồ, timeline, mô phỏng, dashboard...).
+4. Tạo phản hồi rõ ràng sau mỗi thao tác.
+
+---
+
+## 5. Các loại tương tác được ưu tiên
+Tùy nội dung, chủ động kết hợp:
+* Khám phá thông tin (mở lớp, tooltip, zoom).
+* Thay đổi dữ liệu (kéo thanh trượt, bật tắt, nhập số).
+* Mô phỏng (chạy/dừng, thay đổi điều kiện).
+* Lựa chọn và hệ quả (chọn phương án, xem kết quả).
+* Kéo thả và sắp xếp (hỗ trợ cả chuột & cảm ứng).
+* Tương tác với dữ liệu (lọc, sắp xếp, so sánh biểu đồ).
+
+---
+
+## 6. Cấu trúc trải nghiệm gợi ý
+(Tự điều chỉnh cho phù hợp):
+* Phần 1: Mở đầu (Thu hút, thao tác nhẹ).
+* Phần 2: Khám phá (Nhấn, chọn để mở thông tin).
+* Phần 3: Thực hành/Mô phỏng (Thay đổi dữ liệu, xem kết quả).
+* Phần 4: Thử kịch bản (So sánh, đặt lại).
+* Phần 5: Tổng hợp thông điệp.
+
+---
+
+## 7-10. Quy tắc dành riêng cho loại hình báo cáo / giáo dục / hệ thống
+* Thuyết trình: Có thể chia cảnh, tương tác vẫn chạy full-screen, có nút Reset.
+* Đào tạo: Dự đoán kết quả, thử sai, giải thích.
+* Báo cáo/Dữ liệu: Lọc biểu đồ, so sánh. Dùng dữ liệu giả định nếu chưa có.
+* Quy trình: Chạy từng bước, làm nổi bật đường đi hiện tại.
+
+---
+
+## 11. Ràng buộc kỹ thuật bắt buộc
+* Viết toàn bộ HTML, CSS và JS trong **MỘT FILE HTML DUY NHẤT**.
+* KHÔNG dùng React/Vue. Dùng JS thuần và TailwindCSS CDN. (Có thể dùng Chart.js CDN, FontAwesome CDN).
+* Không phụ thuộc API, backend. Không có lỗi Console. Các nút bấm phải hoạt động. Tách JS thành các hàm rõ ràng.
+
+---
+
+## 12. Quản lý trạng thái tương tác
+* JS quản lý rõ: Cảnh hiện tại, Dữ liệu đang chọn, Trạng thái chạy/dừng.
+* Khi Reset, mọi trạng thái phải về ban đầu.
+
+---
+
+## 13-15. Giao diện, Chuyển động & Trải nghiệm
+* Phân cấp rõ ràng, ít chữ, dùng hình khối/icon/biểu đồ.
+* Nút bấm lớn, vùng chọn dễ nhận biết. Responsive mọi thiết bị.
+* Dùng transition mượt mà phản hồi thao tác. Không chớp nháy, không âm thanh tự phát.
+
+---
+
+## 16. Tự xử lý khi thiếu thông tin
+* Tự xác định mục tiêu, tạo dữ liệu minh họa, thiết kế bố cục.
+* Mặc định phải có: 1 khám phá, 1 thay đổi trạng thái, 1 mô phỏng, 1 chức năng Đặt lại.
+* KHÔNG sử dụng Lorem Ipsum, "TODO", "Coming soon".
+
+---
+
+## 17. Định dạng kết quả (TUYỆT ĐỐI TUÂN THỦ)
+* CHỈ TRẢ VỀ mã nguồn HTML hoàn chỉnh. Bắt đầu bằng \`<!DOCTYPE html>\`.
+* KHÔNG viết giải thích trước hay sau mã nguồn.
+* KHÔNG bọc trong Markdown \`\`\`.
+* Không rút gọn, mã phải chạy được ngay lập tức trên trình duyệt.`;
+
+            output.value = promptText;
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', updatePrompt);
+            input.addEventListener('change', updatePrompt);
+        });
+
+        function copyPrompt() {
+            output.select();
+            document.execCommand('copy');
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 2000);
+        }
+
+        updatePrompt();
+    </script>
+</body>
+</html>
