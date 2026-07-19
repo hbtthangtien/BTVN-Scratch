@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Builder - Bài Giảng Tương Tác</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tùy chỉnh thanh cuộn cho đẹp */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px;}
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 p-4 md:p-8 font-sans text-slate-800">
+
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+        
+        <!-- CỘT TRÁI: FORM NHẬP LIỆU -->
+        <div class="w-full lg:w-5/12 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 h-[calc(100vh-4rem)] overflow-y-auto">
+            <h1 class="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
+                <span>🛠️</span> Cấu hình Bài giảng
+            </h1>
+            
+            <form id="promptForm" class="space-y-5">
+                <!-- Group 1: Thông tin cơ bản -->
+                <div class="space-y-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">1. Môn học <span class="text-red-500">*</span></label>
+                        <input type="text" id="MonHoc" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="Lập trình Scratch">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">2. Chủ đề bài học <span class="text-red-500">*</span></label>
+                        <input type="text" id="ChuDeBaiHoc" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="Vòng lặp, câu điều kiện if else">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">3. Độ tuổi / Trình độ <span class="text-red-500">*</span></label>
+                        <input type="text" id="DoTuoiHoacTrinhDo" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="Học sinh 8-10 tuổi, mới học lập trình">
+                    </div>
+                </div>
+
+                <!-- Group 2: Mục tiêu & Ý tưởng -->
+                <div class="space-y-4 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">4. Mục tiêu học tập</label>
+                        <textarea id="MucTieuBaiTap" rows="2" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Trẻ cần hiểu hoặc làm được gì?">Hiểu cách vòng lặp hoạt động, dự đoán kết quả trả về, nắm rõ cách hoạt động của if/else.</textarea>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">5. Ý tưởng nội dung</label>
+                        <textarea id="YTuongNoiDung" rows="2" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Bỏ trống AI sẽ tự nghĩ..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Group 3: Yêu cầu chi tiết -->
+                <div class="space-y-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">6. Nội dung bắt buộc</label>
+                        <textarea id="NoiDungBatBuoc" rows="2" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Nhân vật, tình huống, dữ liệu..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">7. Tương tác mong muốn</label>
+                        <textarea id="TuongTacMongMuon" rows="2" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Kéo thả, chọn đáp án, điều khiển nhân vật..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-sm mb-1">8. Phản hồi mong muốn</label>
+                        <textarea id="PhanHoiMongMuon" rows="2" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Bỏ trống AI sẽ tự thiết kế..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Group 4: Code mẫu -->
+                <div>
+                    <label class="block font-semibold text-sm mb-1 text-slate-700">9. HTML/CSS/JS Mẫu (Nếu có)</label>
+                    <textarea id="MauHTML" rows="3" class="w-full p-2.5 bg-slate-800 text-green-400 font-mono border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Dán code mẫu vào đây..."></textarea>
+                </div>
+            </form>
+        </div>
+
+        <!-- CỘT PHẢI: KẾT QUẢ PROMPT -->
+        <div class="w-full lg:w-7/12 bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col h-[calc(100vh-4rem)]">
+            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-2xl">
+                <h2 class="text-lg font-bold text-slate-800">📝 Prompt Hoàn Chỉnh</h2>
+                <button onclick="copyPrompt()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                    Copy Prompt
+                </button>
+            </div>
+            
+            <div class="p-4 flex-grow overflow-hidden relative">
+                <!-- Vùng chứa prompt text -->
+                <textarea id="outputPrompt" class="w-full h-full p-4 bg-slate-800 text-slate-200 font-mono text-[13px] leading-relaxed rounded-xl focus:outline-none resize-none" readonly></textarea>
+                
+                <!-- Thông báo copy thành công -->
+                <div id="toast" class="absolute top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
+                    Đã copy vào Clipboard!
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Lấy các element
+        const inputs = document.querySelectorAll('input, textarea:not(#outputPrompt)');
+        const output = document.getElementById('outputPrompt');
+        
+        // Hàm xử lý fallback (Nếu trống thì điền text mặc định do AI tự hiểu)
+        const getVal = (id) => document.getElementById(id).value.trim();
+        const fallback = (val, defaultTxt) => val !== "" ? val : `[${defaultTxt}]`;
+
+        // Hàm sinh Prompt
+        function updatePrompt() {
+            const promptText = `Hãy đóng vai đồng thời là:
+1. Một lập trình viên Front-end chuyên nghiệp, có khả năng xây dựng giao diện HTML, CSS và JavaScript đẹp, ổn định, dễ sử dụng.
+2. Một chuyên gia thiết kế bài giảng trực quan dành cho trẻ em, biết cách biến kiến thức trừu tượng thành hình ảnh, chuyển động, trò chơi và thao tác tương tác dễ hiểu.
+3. Và mọi nội dung bài học đều phải liên quan đến 5 phương pháp dạy học sau: Real problem, Analyze – design, build, debug, reflect. Giúp trẻ rèn luyện tư duy, thuật toán.
+
+## 1. Mục tiêu
+Tạo một trang web bài giảng hoặc trò chơi giáo dục tương tác giúp học sinh:
+* Hiểu nội dung bằng hình ảnh và thao tác trực tiếp.
+* Quan sát được quá trình xảy ra thay vì chỉ đọc lý thuyết.
+* Có thể nhấn, kéo thả, lựa chọn, thử nghiệm hoặc thay đổi dữ liệu.
+* Nhận phản hồi ngay khi thực hiện đúng hoặc sai.
+* Cảm thấy giống đang chơi một trò chơi học tập thay vì đọc một bài giảng tĩnh.
+
+## 2. Thông tin đầu vào
+#### Môn học: ${getVal('MonHoc')}
+### Chủ đề bài học: ${getVal('ChuDeBaiHoc')}
+
+### Độ tuổi hoặc trình độ học sinh:
+${getVal('DoTuoiHoacTrinhDo')}
+
+### Mục tiêu học tập:
+${getVal('MucTieuBaiTap')}
+
+### Ý tưởng nội dung:
+${fallback(getVal('YTuongNoiDung'), 'Hãy tự xây dựng ý tưởng cho phù hợp với bài học giúp trực quan hoá vấn đề để cho bài giảng dễ hiểu')}
+
+### Nội dung bắt buộc:
+${fallback(getVal('NoiDungBatBuoc'), 'Hãy tự xây dựng nội dung phù hợp với chủ đề, độ tuổi và mục tiêu bài học')}
+
+### Tương tác mong muốn:
+${fallback(getVal('TuongTacMongMuon'), 'Hãy tự lựa chọn hình thức tương tác phù hợp nhất hợp với nội dung bài học đã lên')}
+
+### Phản hồi mong muốn:
+${fallback(getVal('PhanHoiMongMuon'), 'Hãy tự thiết kế phản hồi phù hợp')}
+
+### Giao diện hoặc mã nguồn mẫu:
+${fallback(getVal('MauHTML'), 'Không có mẫu. Hãy tự thiết kế toàn bộ giao diện.')}
+${getVal('MauHTML') !== '' ? `
+Nếu có mẫu:
+* Giữ lại phong cách, bố cục hoặc thành phần tốt của mẫu.
+* Sửa lỗi nếu mẫu có lỗi.
+* Thay nội dung theo chủ đề mới.
+* Bổ sung tương tác còn thiếu.
+* Không sao chép máy móc những phần không phù hợp với mục tiêu bài học.
+` : ''}
+---
+
+## 3. Yêu cầu về cấu trúc bài giảng
+### không gợi ý kết quả trực tiếp mà chỉ gợi ý để trẻ từ cái gợi ý có thể luận ra được đáp án. chia làm 3 cấp độ gợi ý, tuy nhiên vẫn không được phép đưa ra lời giải trực tiếp
+Trang web nên được tổ chức thành một hành trình học tập rõ ràng:
+
+### Phần 1: Khởi động
+* Dùng một câu hỏi, tình huống, nhiệm vụ hoặc thử thách ngắn để thu hút học sinh.
+* Giúp học sinh biết mình sắp khám phá điều gì.
+* Không đưa quá nhiều lý thuyết ngay từ đầu.
+* Nếu là bài học lý thuyết kiến thức mới phải có giới thiệu để trẻ nắm rõ được thành phần
+
+### Phần 2: Minh họa trực quan
+* Biến khái niệm cần học thành vật thể, nhân vật, sơ đồ, hoạt cảnh hoặc mô phỏng.
+* Cho học sinh nhìn thấy dữ liệu hoặc trạng thái thay đổi theo thời gian.
+* Khi có thể, hiển thị đồng thời: Hành động của người dùng -> Trạng thái hiện tại -> Kết quả sau hành động -> Giải thích ngắn gọn tại sao kết quả xảy ra.
+
+### Phần 3: Học sinh tự thao tác
+* Cho học sinh trực tiếp thử nghiệm.
+* Ưu tiên các tương tác như: Nhấn nút, Chọn đáp án, Kéo thả, Sắp xếp thứ tự, Thay đổi số liệu, Điều khiển nhân vật, Chạy từng bước, Quan sát trước và sau khi thay đổi.
+
+### Phần 4: Thử thách
+* Có ít nhất một bài tập hoặc thử thách để kiểm tra học sinh đã hiểu hay chưa. Độ khó tăng dần.
+* Có thể có điểm số, số lượt thử hoặc thanh tiến trình.
+
+### Phần 5: Tổng kết
+* Tóm tắt kiến thức bằng 2–4 câu ngắn. Nhấn mạnh bản chất.
+* Có nút “Làm lại”, “Chơi lại” hoặc “Thử thách mới”.
+
+---
+
+## 4. Nguyên tắc thiết kế giáo dục
+* Nội dung phải phù hợp với độ tuổi được cung cấp. Mỗi màn hình chỉ nên tập trung vào một ý chính.
+* Dùng câu ngắn, dễ hiểu và hướng dẫn rõ ràng. Không trình bày lý thuyết dài.
+* Sau mỗi thao tác quan trọng, cần cho học sinh nhìn thấy nguyên nhân và kết quả.
+* Khi học sinh làm sai: Không chỉ báo “Sai”. Cần đưa ra gợi ý, không hiện đáp án ngay lần đầu.
+* Khi học sinh làm đúng: Có phản hồi tích cực, giải thích ngắn lý do.
+* Ưu tiên “học sinh tự phát hiện quy luật” thay vì hiển thị toàn bộ lời giải.
+
+---
+
+## 5. Ràng buộc kỹ thuật bắt buộc
+* Viết toàn bộ HTML, CSS và JavaScript trong **một file HTML duy nhất**.
+* Không sử dụng React, Vue, Angular. Sử dụng JavaScript thuần và TailwindCSS qua CDN.
+* Không sử dụng hình ảnh bên ngoài. Ưu tiên: CSS shapes, Emoji, SVG nội tuyến, Icon từ thư viện.
+* Tất cả nút bấm và tương tác phải hoạt động thực sự. Không để lỗi JavaScript trong Console.
+* Có xử lý để người dùng không thể cộng điểm nhiều lần cho cùng một câu hỏi.
+* Có chức năng đặt lại trạng thái hoặc chơi lại.
+
+---
+
+## 6. Yêu cầu giao diện
+* Thiết kế vui tươi, hiện đại, thân thiện trẻ em. Font chữ lớn, bo tròn.
+* Giao diện phải responsive (Mobile, Tablet, PC).
+* Không để nội dung tràn màn hình. Các vùng kéo thả cần đủ lớn.
+
+---
+
+## 7. Chuyển động và phản hồi trực quan
+* Sử dụng animation/transition mượt mà (chuyển bước, nhấn nút, kéo thả, trả lời, cộng điểm...).
+* Có thể dùng: Confetti, hiệu ứng rung khi sai, nảy lên/sáng khi đúng.
+* Không dùng âm thanh tự phát, không nhấp nháy mạnh.
+
+---
+
+## 8. Quản lý trạng thái & Xử lý thiếu thông tin
+* JS cần quản lý rõ: Bước hiện tại, điểm số, số lần thử, trạng thái đúng/sai.
+* Không hỏi lại người dùng. Nếu thiếu thông tin, hãy tự đưa ra giả định hợp lý, tự tạo nội dung/hình ảnh/câu hỏi.
+* KHÔNG để các placeholder dạng "Nội dung ở đây", "TODO".
+
+---
+
+## 9. Định dạng kết quả (RẤT QUAN TRỌNG)
+* Chỉ trả về mã nguồn hoàn chỉnh của file HTML.
+* Bắt đầu bằng \`<!DOCTYPE html>\`.
+* Không viết phần giải thích trước hoặc sau mã nguồn.
+* Không sử dụng Markdown. Không đặt mã nguồn trong dấu ba dấu backtick.
+* Không rút gọn mã nguồn. Không bỏ qua JavaScript.
+* Sản phẩm phải có thể sao chép, lưu thành index.html và sử dụng ngay.`;
+
+            output.value = promptText;
+        }
+
+        // Lắng nghe sự kiện gõ phím để update real-time
+        inputs.forEach(input => {
+            input.addEventListener('input', updatePrompt);
+        });
+
+        // Hàm Copy
+        function copyPrompt() {
+            output.select();
+            document.execCommand('copy');
+            
+            // Hiện thông báo toast
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 2000);
+        }
+
+        // Chạy lần đầu khi load trang
+        updatePrompt();
+    </script>
+</body>
+</html>
